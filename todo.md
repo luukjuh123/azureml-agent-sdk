@@ -1,0 +1,44 @@
+# azureml-agent-sdk todo
+
+- [ ] [P1-01] Monorepo scaffold: uv workspace, src/azureml_agent_sdk/, tests/, examples/, docs/
+- [ ] [P1-02] AzureML client wrapper: connect to AML workspace via DefaultAzureCredential, list batch endpoints
+- [ ] [P1-03] BatchEndpointTrigger: submit a batch job, poll status, retrieve output blob path
+- [ ] [P1-04] AzureOpenAIAgent class: wraps AOAI chat completions endpoint, configurable system prompt, temperature, model
+- [ ] [P1-05] AgentPipeline class: chain one BatchEndpointTrigger -> one or more AzureOpenAIAgents sequentially
+- [ ] [P1-06] Result passing: parse batch output (JSONL/CSV), inject rows as user messages into agent context window
+- [ ] [P1-07] Credential manager: unified DefaultAzureCredential + env-var fallback, never log secrets
+- [ ] [P1-08] Logging & telemetry: structured JSON logs per pipeline step, optional Azure Monitor sink
+- [ ] [P1-09] Config schema: Pydantic v2 models for BatchEndpointConfig, AgentConfig, PipelineConfig
+- [ ] [P1-10] Unit tests for Phase 1 (pytest + pytest-asyncio, mock Azure SDK calls, 80% coverage)
+- [ ] [P2-01] ParallelAgentGroup: run N agents on same batch output concurrently (asyncio.gather)
+- [ ] [P2-02] AgentRouter: route batch output rows to different agents based on rule/classifier
+- [ ] [P2-03] AgentMemory: per-agent conversation history with configurable max-token window
+- [ ] [P2-04] RetryPolicy: exponential backoff + jitter for AOAI rate-limit (429) and transient errors
+- [ ] [P2-05] PipelineEvent hooks: on_batch_complete, on_agent_start, on_agent_complete, on_error callbacks
+- [ ] [P2-06] YAML pipeline definition: load a full AgentPipeline from a YAML file
+- [ ] [P2-07] CLI entrypoint: azureml-agent run pipeline.yaml to trigger from terminal
+- [ ] [P2-08] Unit + integration tests for Phase 2 (mock AML + AOAI, 80% coverage)
+- [ ] [P3-01] DataQualityAgent base class: receives batch output, emits structured QualityReport
+- [ ] [P3-02] NullCheckAgent: flags rows with null/missing values above threshold
+- [ ] [P3-03] SchemaValidationAgent: validates batch output rows against a Pydantic schema
+- [ ] [P3-04] AnomalyDetectionAgent: uses AOAI to flag statistical outliers in numeric columns
+- [ ] [P3-05] DuplicateDetectionAgent: detects duplicate rows using hash + fuzzy match
+- [ ] [P3-06] SummaryAgent: AOAI generates a natural-language summary of the batch run
+- [ ] [P3-07] QualityReport model: severity levels (INFO/WARN/ERROR), per-row findings, aggregate stats
+- [ ] [P3-08] Report serializer: write QualityReport to JSON, Markdown, and Azure Blob Storage
+- [ ] [P3-09] Tests for Phase 3 agents (mock AOAI responses, edge cases)
+- [ ] [P4-01] FastAPI app: POST /pipelines/run, GET /pipelines/{run_id}/status, GET /pipelines/{run_id}/report
+- [ ] [P4-02] Background task runner: runs AgentPipeline async in FastAPI background task
+- [ ] [P4-03] Run store: SQLite (dev) / Azure Table Storage (prod) for pipeline run state
+- [ ] [P4-04] Auth middleware: Bearer token validation (env-var secret for dev)
+- [ ] [P4-05] OpenAPI docs at /docs with example payloads
+- [ ] [P4-06] Docker: Dockerfile + docker-compose for local dev (no AML credentials needed in compose)
+- [ ] [P4-07] Tests for REST API (httpx test client, mock pipeline runner)
+- [ ] [P5-01] Example: fraud-check pipeline — AML batch scores transactions, AOAI agent reviews flagged rows
+- [ ] [P5-02] Example: content-moderation pipeline — AML batch classifies text, AOAI agent drafts moderation decisions
+- [ ] [P5-03] Example: data-drift pipeline — AML batch computes drift metrics, AOAI agent writes drift report
+- [ ] [P5-04] Docs: Getting Started guide (README.md) with install, config, and first pipeline
+- [ ] [P5-05] Docs: Architecture diagram (Mermaid in docs/architecture.md)
+- [ ] [P5-06] Docs: API reference (auto-generated from docstrings via pdoc)
+- [ ] [P5-07] Docs: Contributing guide and development setup
+- [ ] [P5-08] PyPI packaging: pyproject.toml, versioning, build/publish workflow docs

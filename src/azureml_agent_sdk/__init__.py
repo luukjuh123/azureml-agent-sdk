@@ -12,6 +12,7 @@ from azureml_agent_sdk.batch_trigger import (
 )
 from azureml_agent_sdk.config import AgentConfig, BatchEndpointConfig, PipelineConfig
 from azureml_agent_sdk.credentials import CredentialManager, MissingCredentialError
+from azureml_agent_sdk.events import PipelineEvents
 from azureml_agent_sdk.logging_utils import (
     JsonFormatter,
     attach_azure_monitor_sink,
@@ -55,6 +56,7 @@ __all__ = [
     "NoMatchingAgentError",
     "ParallelAgentGroup",
     "PipelineConfig",
+    "PipelineEvents",
     "PipelineResult",
     "RetryPolicy",
     "UnsupportedBatchOutputFormatError",

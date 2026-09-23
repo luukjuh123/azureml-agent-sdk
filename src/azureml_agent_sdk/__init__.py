@@ -28,6 +28,7 @@ from azureml_agent_sdk.results import (
     parse_jsonl,
     rows_to_messages,
 )
+from azureml_agent_sdk.retry import DEFAULT_RETRYABLE_EXCEPTIONS, RetryPolicy
 from azureml_agent_sdk.router import AgentRouter, NoMatchingAgentError
 
 __version__ = "0.1.0"
@@ -48,12 +49,14 @@ __all__ = [
     "BatchJobResult",
     "BatchJobTimeoutError",
     "CredentialManager",
+    "DEFAULT_RETRYABLE_EXCEPTIONS",
     "JsonFormatter",
     "MissingCredentialError",
     "NoMatchingAgentError",
     "ParallelAgentGroup",
     "PipelineConfig",
     "PipelineResult",
+    "RetryPolicy",
     "UnsupportedBatchOutputFormatError",
     "attach_azure_monitor_sink",
     "get_pipeline_logger",

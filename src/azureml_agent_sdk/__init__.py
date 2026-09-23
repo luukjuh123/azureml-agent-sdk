@@ -18,6 +18,7 @@ from azureml_agent_sdk.logging_utils import (
     get_pipeline_logger,
     log_step,
 )
+from azureml_agent_sdk.memory import AgentMemory
 from azureml_agent_sdk.parallel import ParallelAgentGroup
 from azureml_agent_sdk.pipeline import AgentPipeline, AgentRunResult, PipelineResult
 from azureml_agent_sdk.results import (
@@ -33,6 +34,7 @@ __version__ = "0.1.0"
 
 __all__ = [
     "AgentConfig",
+    "AgentMemory",
     "AgentPipeline",
     "AgentResponse",
     "AgentRouter",

@@ -133,6 +133,11 @@ def test_max_delay_must_be_at_least_base_delay() -> None:
         RetryPolicy(base_delay=10.0, max_delay=1.0)
 
 
+def test_base_delay_must_be_positive() -> None:
+    with pytest.raises(ValueError):
+        RetryPolicy(base_delay=0.0)
+
+
 def test_zero_max_retries_means_no_retrying() -> None:
     clock = _FakeClock()
     policy = RetryPolicy(max_retries=0, base_delay=0.01, sleep=clock.sleep)

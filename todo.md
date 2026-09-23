@@ -10,14 +10,14 @@
 - [x] [P1-08] Logging & telemetry: structured JSON logs per pipeline step, optional Azure Monitor sink
 - [x] [P1-09] Config schema: Pydantic v2 models for BatchEndpointConfig, AgentConfig, PipelineConfig
 - [x] [P1-10] Unit tests for Phase 1 (pytest + pytest-asyncio, mock Azure SDK calls, 80% coverage)
-- [ ] [P2-01] ParallelAgentGroup: run N agents on same batch output concurrently (asyncio.gather)
-- [ ] [P2-02] AgentRouter: route batch output rows to different agents based on rule/classifier
-- [ ] [P2-03] AgentMemory: per-agent conversation history with configurable max-token window
-- [ ] [P2-04] RetryPolicy: exponential backoff + jitter for AOAI rate-limit (429) and transient errors
-- [ ] [P2-05] PipelineEvent hooks: on_batch_complete, on_agent_start, on_agent_complete, on_error callbacks
-- [ ] [P2-06] YAML pipeline definition: load a full AgentPipeline from a YAML file
-- [ ] [P2-07] CLI entrypoint: azureml-agent run pipeline.yaml to trigger from terminal
-- [ ] [P2-08] Unit + integration tests for Phase 2 (mock AML + AOAI, 80% coverage)
+- [x] [P2-01] ParallelAgentGroup: run N agents on same batch output concurrently (asyncio.gather)
+- [x] [P2-02] AgentRouter: route batch output rows to different agents based on rule/classifier
+- [x] [P2-03] AgentMemory: per-agent conversation history with configurable max-token window
+- [x] [P2-04] RetryPolicy: exponential backoff + jitter for AOAI rate-limit (429) and transient errors
+- [x] [P2-05] PipelineEvent hooks: on_batch_complete, on_agent_start, on_agent_complete, on_error callbacks
+- [x] [P2-06] YAML pipeline definition: load a full AgentPipeline from a YAML file
+- [x] [P2-07] CLI entrypoint: azureml-agent run pipeline.yaml to trigger from terminal
+- [x] [P2-08] Unit + integration tests for Phase 2 (mock AML + AOAI, 80% coverage)
 - [ ] [P3-01] DataQualityAgent base class: receives batch output, emits structured QualityReport
 - [ ] [P3-02] NullCheckAgent: flags rows with null/missing values above threshold
 - [ ] [P3-03] SchemaValidationAgent: validates batch output rows against a Pydantic schema

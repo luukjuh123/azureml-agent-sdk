@@ -10,6 +10,7 @@ from typing import Any, Protocol
 
 from azureml_agent_sdk.agent import AgentResponse
 from azureml_agent_sdk.batch_trigger import BatchJobResult
+from azureml_agent_sdk.events import PipelineEvents
 from azureml_agent_sdk.logging_utils import get_pipeline_logger, log_step
 from azureml_agent_sdk.results import parse_batch_output, rows_to_messages
 
@@ -51,6 +52,7 @@ class AgentPipeline:
         trigger: _Trigger,
         agents: list[_Agent],
         output_parser: Any = parse_batch_output,
+        events: PipelineEvents | None = None,
     ) -> None:
         if not agents:
             raise ValueError("AgentPipeline requires at least one agent")
@@ -59,6 +61,7 @@ class AgentPipeline:
         self.agents = agents
         self._output_parser = output_parser
         self._logger = get_pipeline_logger()
+        self.events = events or PipelineEvents()
 
     def run(self) -> PipelineResult:
         """Execute the batch trigger, then run every agent over every parsed row."""
@@ -68,13 +71,23 @@ class AgentPipeline:
             pipeline=self.name,
             endpoint=self.trigger.config.endpoint_name,
         )
-        job = self.trigger.run()
+        self.events.emit_sync(
+            "batch_start", pipeline=self.name, endpoint=self.trigger.config.endpoint_name
+        )
+        try:
+            job = self.trigger.run()
+        except Exception as exc:
+            self.events.emit_sync("error", pipeline=self.name, stage="batch", error=exc)
+            raise
         log_step(
             self._logger,
             "batch.complete",
             pipeline=self.name,
             job_name=job.job_name,
             status=job.status,
+        )
+        self.events.emit_sync(
+            "batch_complete", pipeline=self.name, job_name=job.job_name, status=job.status
         )
 
         rows = self._output_parser(job.output_path)
@@ -83,10 +96,23 @@ class AgentPipeline:
         agent_runs: list[AgentRunResult] = []
         for agent in self.agents:
             log_step(self._logger, "agent.start", pipeline=self.name, agent=agent.config.name)
-            responses = [agent.run(message["content"]) for message in messages]
+            self.events.emit_sync("agent_start", pipeline=self.name, agent=agent.config.name)
+            try:
+                responses = [agent.run(message["content"]) for message in messages]
+            except Exception as exc:
+                self.events.emit_sync(
+                    "error", pipeline=self.name, stage="agent", agent=agent.config.name, error=exc
+                )
+                raise
             log_step(
                 self._logger,
                 "agent.complete",
+                pipeline=self.name,
+                agent=agent.config.name,
+                rows_processed=len(responses),
+            )
+            self.events.emit_sync(
+                "agent_complete",
                 pipeline=self.name,
                 agent=agent.config.name,
                 rows_processed=len(responses),

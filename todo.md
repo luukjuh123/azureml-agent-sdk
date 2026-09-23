@@ -1,15 +1,15 @@
 # azureml-agent-sdk todo
 
-- [ ] [P1-01] Monorepo scaffold: uv workspace, src/azureml_agent_sdk/, tests/, examples/, docs/
-- [ ] [P1-02] AzureML client wrapper: connect to AML workspace via DefaultAzureCredential, list batch endpoints
-- [ ] [P1-03] BatchEndpointTrigger: submit a batch job, poll status, retrieve output blob path
-- [ ] [P1-04] AzureOpenAIAgent class: wraps AOAI chat completions endpoint, configurable system prompt, temperature, model
-- [ ] [P1-05] AgentPipeline class: chain one BatchEndpointTrigger -> one or more AzureOpenAIAgents sequentially
-- [ ] [P1-06] Result passing: parse batch output (JSONL/CSV), inject rows as user messages into agent context window
-- [ ] [P1-07] Credential manager: unified DefaultAzureCredential + env-var fallback, never log secrets
-- [ ] [P1-08] Logging & telemetry: structured JSON logs per pipeline step, optional Azure Monitor sink
-- [ ] [P1-09] Config schema: Pydantic v2 models for BatchEndpointConfig, AgentConfig, PipelineConfig
-- [ ] [P1-10] Unit tests for Phase 1 (pytest + pytest-asyncio, mock Azure SDK calls, 80% coverage)
+- [x] [P1-01] Monorepo scaffold: uv workspace, src/azureml_agent_sdk/, tests/, examples/, docs/
+- [x] [P1-02] AzureML client wrapper: connect to AML workspace via DefaultAzureCredential, list batch endpoints
+- [x] [P1-03] BatchEndpointTrigger: submit a batch job, poll status, retrieve output blob path
+- [x] [P1-04] AzureOpenAIAgent class: wraps AOAI chat completions endpoint, configurable system prompt, temperature, model
+- [x] [P1-05] AgentPipeline class: chain one BatchEndpointTrigger -> one or more AzureOpenAIAgents sequentially
+- [x] [P1-06] Result passing: parse batch output (JSONL/CSV), inject rows as user messages into agent context window
+- [x] [P1-07] Credential manager: unified DefaultAzureCredential + env-var fallback, never log secrets
+- [x] [P1-08] Logging & telemetry: structured JSON logs per pipeline step, optional Azure Monitor sink
+- [x] [P1-09] Config schema: Pydantic v2 models for BatchEndpointConfig, AgentConfig, PipelineConfig
+- [x] [P1-10] Unit tests for Phase 1 (pytest + pytest-asyncio, mock Azure SDK calls, 80% coverage)
 - [ ] [P2-01] ParallelAgentGroup: run N agents on same batch output concurrently (asyncio.gather)
 - [ ] [P2-02] AgentRouter: route batch output rows to different agents based on rule/classifier
 - [ ] [P2-03] AgentMemory: per-agent conversation history with configurable max-token window

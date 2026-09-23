@@ -1,0 +1,44 @@
+[project]
+name = "azureml-agent-sdk"
+version = "0.1.0"
+description = "Couple Azure ML Batch Endpoints with Azure OpenAI agents for post-processing pipelines"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+dependencies = [
+    "azure-ai-ml>=1.19,<2",
+    "azure-identity>=1.17,<2",
+    "openai>=1.40,<2",
+    "pydantic>=2.7,<3",
+]
+
+[project.optional-dependencies]
+monitor = [
+    "azure-monitor-opentelemetry>=1.6,<2",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/azureml_agent_sdk"]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.2,<9",
+    "pytest-asyncio>=0.23,<1",
+    "pytest-cov>=5.0,<6",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+filterwarnings = [
+    # Third-party noise from azure-ai-ml's marshmallow schemas, not our code.
+    "ignore::marshmallow.warnings.ChangedInMarshmallow4Warning",
+    "ignore::marshmallow.warnings.RemovedInMarshmallow4Warning",
+]
+
+[tool.coverage.run]
+source = ["src/azureml_agent_sdk"]

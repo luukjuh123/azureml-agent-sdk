@@ -27,6 +27,7 @@ from azureml_agent_sdk.results import (
     parse_jsonl,
     rows_to_messages,
 )
+from azureml_agent_sdk.router import AgentRouter, NoMatchingAgentError
 
 __version__ = "0.1.0"
 
@@ -34,6 +35,7 @@ __all__ = [
     "AgentConfig",
     "AgentPipeline",
     "AgentResponse",
+    "AgentRouter",
     "AgentRunResult",
     "AzureMLClientWrapper",
     "AzureOpenAIAgent",
@@ -46,6 +48,7 @@ __all__ = [
     "CredentialManager",
     "JsonFormatter",
     "MissingCredentialError",
+    "NoMatchingAgentError",
     "ParallelAgentGroup",
     "PipelineConfig",
     "PipelineResult",

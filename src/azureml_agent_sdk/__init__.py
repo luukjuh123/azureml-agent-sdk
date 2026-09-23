@@ -18,6 +18,7 @@ from azureml_agent_sdk.logging_utils import (
     get_pipeline_logger,
     log_step,
 )
+from azureml_agent_sdk.parallel import ParallelAgentGroup
 from azureml_agent_sdk.pipeline import AgentPipeline, AgentRunResult, PipelineResult
 from azureml_agent_sdk.results import (
     UnsupportedBatchOutputFormatError,
@@ -45,6 +46,7 @@ __all__ = [
     "CredentialManager",
     "JsonFormatter",
     "MissingCredentialError",
+    "ParallelAgentGroup",
     "PipelineConfig",
     "PipelineResult",
     "UnsupportedBatchOutputFormatError",

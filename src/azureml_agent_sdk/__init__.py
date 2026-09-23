@@ -31,6 +31,14 @@ from azureml_agent_sdk.results import (
 )
 from azureml_agent_sdk.retry import DEFAULT_RETRYABLE_EXCEPTIONS, RetryPolicy
 from azureml_agent_sdk.router import AgentRouter, NoMatchingAgentError
+from azureml_agent_sdk.yaml_loader import (
+    PipelineYamlError,
+    YamlAgentConfig,
+    YamlPipelineConfig,
+    build_pipeline,
+    load_pipeline,
+    load_pipeline_config,
+)
 
 __version__ = "0.1.0"
 
@@ -58,10 +66,16 @@ __all__ = [
     "PipelineConfig",
     "PipelineEvents",
     "PipelineResult",
+    "PipelineYamlError",
     "RetryPolicy",
     "UnsupportedBatchOutputFormatError",
+    "YamlAgentConfig",
+    "YamlPipelineConfig",
     "attach_azure_monitor_sink",
+    "build_pipeline",
     "get_pipeline_logger",
+    "load_pipeline",
+    "load_pipeline_config",
     "log_step",
     "parse_batch_output",
     "parse_csv",

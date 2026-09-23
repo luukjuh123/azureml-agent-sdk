@@ -10,6 +10,7 @@ dependencies = [
     "azure-identity>=1.17,<2",
     "openai>=1.40,<2",
     "pydantic>=2.7,<3",
+    "pyyaml>=6.0,<7",
 ]
 
 [project.optional-dependencies]

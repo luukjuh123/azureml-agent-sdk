@@ -5,13 +5,15 @@ Batch output rows are parsed and fed into each agent's context window in turn
 """
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Any, Protocol
 
 from azureml_agent_sdk.agent import AgentResponse
 from azureml_agent_sdk.batch_trigger import BatchJobResult
 from azureml_agent_sdk.events import PipelineEvents
 from azureml_agent_sdk.logging_utils import get_pipeline_logger, log_step
+from azureml_agent_sdk.quality.base import DataQualityAgent
+from azureml_agent_sdk.quality.models import QualityReport
 from azureml_agent_sdk.results import parse_batch_output, rows_to_messages
 
 
@@ -40,6 +42,7 @@ class PipelineResult:
     job: BatchJobResult
     rows: list[dict[str, Any]]
     agent_runs: list[AgentRunResult]
+    quality_reports: list[QualityReport] = field(default_factory=list)
 
 
 class AgentPipeline:
@@ -94,7 +97,11 @@ class AgentPipeline:
         messages = rows_to_messages(rows)
 
         agent_runs: list[AgentRunResult] = []
+        quality_reports: list[QualityReport] = []
         for agent in self.agents:
+            if isinstance(agent, DataQualityAgent):
+                quality_reports.append(self._run_quality_agent(agent, job, rows))
+                continue
             log_step(self._logger, "agent.start", pipeline=self.name, agent=agent.config.name)
             self.events.emit_sync("agent_start", pipeline=self.name, agent=agent.config.name)
             try:
@@ -119,4 +126,32 @@ class AgentPipeline:
             )
             agent_runs.append(AgentRunResult(agent_name=agent.config.name, responses=responses))
 
-        return PipelineResult(job=job, rows=rows, agent_runs=agent_runs)
+        return PipelineResult(
+            job=job, rows=rows, agent_runs=agent_runs, quality_reports=quality_reports
+        )
+
+    def _run_quality_agent(
+        self, agent: DataQualityAgent, job: BatchJobResult, rows: list[dict[str, Any]]
+    ) -> QualityReport:
+        """Run a DataQualityAgent once over all rows; the report is tagged with the job name."""
+        log_step(self._logger, "agent.start", pipeline=self.name, agent=agent.name)
+        self.events.emit_sync("agent_start", pipeline=self.name, agent=agent.name)
+        try:
+            report = agent.check(rows)
+        except Exception as exc:
+            self.events.emit_sync(
+                "error", pipeline=self.name, stage="agent", agent=agent.name, error=exc
+            )
+            raise
+        report = report.model_copy(update={"run_id": job.job_name})
+        log_step(
+            self._logger,
+            "agent.complete",
+            pipeline=self.name,
+            agent=agent.name,
+            rows_processed=len(rows),
+        )
+        self.events.emit_sync(
+            "agent_complete", pipeline=self.name, agent=agent.name, rows_processed=len(rows)
+        )
+        return report

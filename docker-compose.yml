@@ -1,0 +1,13 @@
+# Local dev: no AML/AOAI credentials are baked in. Pass them via your shell env if you
+# want real runs; the API itself only needs AZUREML_AGENT_API_TOKEN.
+services:
+  api:
+    build: .
+    ports: ["8000:8000"]
+    environment:
+      AZUREML_AGENT_API_TOKEN: ${AZUREML_AGENT_API_TOKEN:?set AZUREML_AGENT_API_TOKEN}
+    volumes:
+      - ./examples:/pipelines:ro
+      - run-data:/data
+volumes:
+  run-data:

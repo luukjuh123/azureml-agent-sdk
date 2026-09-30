@@ -27,13 +27,13 @@
 - [x] [P3-07] QualityReport model: severity levels (INFO/WARN/ERROR), per-row findings, aggregate stats
 - [x] [P3-08] Report serializer: write QualityReport to JSON, Markdown, and Azure Blob Storage
 - [x] [P3-09] Tests for Phase 3 agents (mock AOAI responses, edge cases)
-- [ ] [P4-01] FastAPI app: POST /pipelines/run, GET /pipelines/{run_id}/status, GET /pipelines/{run_id}/report
-- [ ] [P4-02] Background task runner: runs AgentPipeline async in FastAPI background task
-- [ ] [P4-03] Run store: SQLite (dev) / Azure Table Storage (prod) for pipeline run state
-- [ ] [P4-04] Auth middleware: Bearer token validation (env-var secret for dev)
-- [ ] [P4-05] OpenAPI docs at /docs with example payloads
-- [ ] [P4-06] Docker: Dockerfile + docker-compose for local dev (no AML credentials needed in compose)
-- [ ] [P4-07] Tests for REST API (httpx test client, mock pipeline runner)
+- [x] [P4-01] FastAPI app: POST /pipelines/run, GET /pipelines/{run_id}/status, GET /pipelines/{run_id}/report
+- [x] [P4-02] Background task runner: runs AgentPipeline async in FastAPI background task
+- [x] [P4-03] Run store: SQLite (dev) / Azure Table Storage (prod) for pipeline run state
+- [x] [P4-04] Auth middleware: Bearer token validation (env-var secret for dev)
+- [x] [P4-05] OpenAPI docs at /docs with example payloads
+- [x] [P4-06] Docker: Dockerfile + docker-compose for local dev (no AML credentials needed in compose)
+- [x] [P4-07] Tests for REST API (httpx test client, mock pipeline runner)
 - [ ] [P5-01] Example: fraud-check pipeline — AML batch scores transactions, AOAI agent reviews flagged rows
 - [ ] [P5-02] Example: content-moderation pipeline — AML batch classifies text, AOAI agent drafts moderation decisions
 - [ ] [P5-03] Example: data-drift pipeline — AML batch computes drift metrics, AOAI agent writes drift report

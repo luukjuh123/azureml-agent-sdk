@@ -18,15 +18,15 @@
 - [x] [P2-06] YAML pipeline definition: load a full AgentPipeline from a YAML file
 - [x] [P2-07] CLI entrypoint: azureml-agent run pipeline.yaml to trigger from terminal
 - [x] [P2-08] Unit + integration tests for Phase 2 (mock AML + AOAI, 80% coverage)
-- [ ] [P3-01] DataQualityAgent base class: receives batch output, emits structured QualityReport
-- [ ] [P3-02] NullCheckAgent: flags rows with null/missing values above threshold
-- [ ] [P3-03] SchemaValidationAgent: validates batch output rows against a Pydantic schema
-- [ ] [P3-04] AnomalyDetectionAgent: uses AOAI to flag statistical outliers in numeric columns
-- [ ] [P3-05] DuplicateDetectionAgent: detects duplicate rows using hash + fuzzy match
-- [ ] [P3-06] SummaryAgent: AOAI generates a natural-language summary of the batch run
-- [ ] [P3-07] QualityReport model: severity levels (INFO/WARN/ERROR), per-row findings, aggregate stats
-- [ ] [P3-08] Report serializer: write QualityReport to JSON, Markdown, and Azure Blob Storage
-- [ ] [P3-09] Tests for Phase 3 agents (mock AOAI responses, edge cases)
+- [x] [P3-01] DataQualityAgent base class: receives batch output, emits structured QualityReport
+- [x] [P3-02] NullCheckAgent: flags rows with null/missing values above threshold
+- [x] [P3-03] SchemaValidationAgent: validates batch output rows against a Pydantic schema
+- [x] [P3-04] AnomalyDetectionAgent: uses AOAI to flag statistical outliers in numeric columns
+- [x] [P3-05] DuplicateDetectionAgent: detects duplicate rows using hash + fuzzy match
+- [x] [P3-06] SummaryAgent: AOAI generates a natural-language summary of the batch run
+- [x] [P3-07] QualityReport model: severity levels (INFO/WARN/ERROR), per-row findings, aggregate stats
+- [x] [P3-08] Report serializer: write QualityReport to JSON, Markdown, and Azure Blob Storage
+- [x] [P3-09] Tests for Phase 3 agents (mock AOAI responses, edge cases)
 - [ ] [P4-01] FastAPI app: POST /pipelines/run, GET /pipelines/{run_id}/status, GET /pipelines/{run_id}/report
 - [ ] [P4-02] Background task runner: runs AgentPipeline async in FastAPI background task
 - [ ] [P4-03] Run store: SQLite (dev) / Azure Table Storage (prod) for pipeline run state

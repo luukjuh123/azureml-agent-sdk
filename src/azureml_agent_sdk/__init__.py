@@ -22,6 +22,18 @@ from azureml_agent_sdk.logging_utils import (
 from azureml_agent_sdk.memory import AgentMemory
 from azureml_agent_sdk.parallel import ParallelAgentGroup
 from azureml_agent_sdk.pipeline import AgentPipeline, AgentRunResult, PipelineResult
+from azureml_agent_sdk.quality import (
+    AggregateStats,
+    AnomalyDetectionAgent,
+    DataQualityAgent,
+    DuplicateDetectionAgent,
+    Finding,
+    NullCheckAgent,
+    QualityReport,
+    ReportSerializer,
+    SchemaValidationAgent,
+    SummaryAgent,
+)
 from azureml_agent_sdk.results import (
     UnsupportedBatchOutputFormatError,
     parse_batch_output,
@@ -43,6 +55,16 @@ from azureml_agent_sdk.yaml_loader import (
 __version__ = "0.1.0"
 
 __all__ = [
+    "AggregateStats",
+    "AnomalyDetectionAgent",
+    "DataQualityAgent",
+    "DuplicateDetectionAgent",
+    "Finding",
+    "NullCheckAgent",
+    "QualityReport",
+    "ReportSerializer",
+    "SchemaValidationAgent",
+    "SummaryAgent",
     "AgentConfig",
     "AgentMemory",
     "AgentPipeline",

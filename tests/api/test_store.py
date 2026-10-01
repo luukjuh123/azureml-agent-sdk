@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 import pytest
 
@@ -10,9 +10,10 @@ from azureml_agent_sdk.api.store import (
 
 
 def _record(run_id="r1"):
-    now = datetime.now(timezone.utc)
-    return RunRecord(run_id=run_id, status="pending", pipeline_file="p.yaml",
-                     created_at=now, updated_at=now)
+    now = datetime.now(UTC)
+    return RunRecord(
+        run_id=run_id, status="pending", pipeline_file="p.yaml", created_at=now, updated_at=now
+    )
 
 
 def test_sqlite_roundtrip(tmp_path):

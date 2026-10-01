@@ -2,15 +2,15 @@
 together the way a real pipeline would use them, with every Azure ML/AOAI
 call mocked out via fakes.
 """
+
 from __future__ import annotations
 
 import threading
 import time
 from dataclasses import dataclass
 
-import openai
 import httpx
-import pytest
+import openai
 
 from azureml_agent_sdk.agent import AgentResponse
 from azureml_agent_sdk.memory import AgentMemory

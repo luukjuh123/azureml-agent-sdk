@@ -10,6 +10,7 @@ fall back to the usual environment variables when omitted from the YAML,
 matching the credential manager's env-var fallback convention used
 elsewhere in the SDK.
 """
+
 from __future__ import annotations
 
 from collections.abc import Callable
@@ -84,9 +85,9 @@ def build_pipeline(
     )
 
     aml_client = AzureMLClientWrapper(
-        subscription_id=subscription_id,
-        resource_group=resource_group,
-        workspace_name=workspace_name,
+        subscription_id=subscription_id,  # type: ignore[arg-type]
+        resource_group=resource_group,  # type: ignore[arg-type]
+        workspace_name=workspace_name,  # type: ignore[arg-type]
         credential_manager=credential_manager,
         ml_client_factory=ml_client_factory,
     )

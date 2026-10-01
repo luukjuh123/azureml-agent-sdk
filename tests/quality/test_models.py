@@ -1,4 +1,5 @@
 """Tests for QualityReport model (P3-07)."""
+
 from __future__ import annotations
 
 from datetime import datetime

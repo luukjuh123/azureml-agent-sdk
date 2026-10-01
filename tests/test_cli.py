@@ -3,6 +3,7 @@
 The pipeline runner is monkeypatched so these tests never touch real Azure
 ML or Azure OpenAI, only the CLI's argument parsing, dispatch, and output.
 """
+
 from __future__ import annotations
 
 from pathlib import Path

@@ -1,4 +1,5 @@
 """Sanity tests for the package scaffold and public API surface (P1-01, P1-10)."""
+
 from __future__ import annotations
 
 import azureml_agent_sdk as sdk

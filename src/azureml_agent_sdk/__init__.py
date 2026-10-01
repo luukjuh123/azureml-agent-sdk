@@ -1,5 +1,6 @@
 """azureml-agent-sdk: couple Azure ML Batch Endpoints with Azure OpenAI agents to
 build multi-agent post-processing pipelines."""
+
 from __future__ import annotations
 
 from azureml_agent_sdk.agent import AgentResponse, AzureOpenAIAgent

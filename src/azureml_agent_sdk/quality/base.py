@@ -1,4 +1,5 @@
 """Abstract base class for post-batch data quality agents (P3-01)."""
+
 from __future__ import annotations
 
 import uuid

@@ -1,4 +1,5 @@
 """NullCheckAgent tests (P3-02)."""
+
 from __future__ import annotations
 
 import pytest

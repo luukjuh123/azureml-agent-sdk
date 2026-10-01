@@ -7,6 +7,7 @@ generally safe to retry against Azure OpenAI. Delay grows as
 ``base_delay * 2 ** (attempt - 1)``, capped at ``max_delay``, plus a random
 jitter term bounded by ``jitter`` (a fraction of the capped delay).
 """
+
 from __future__ import annotations
 
 import random

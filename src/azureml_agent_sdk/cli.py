@@ -6,6 +6,7 @@ actual work (parse YAML, build clients, execute the pipeline) lives in
 module-level function so tests can monkeypatch it without needing real
 Azure ML or Azure OpenAI credentials.
 """
+
 from __future__ import annotations
 
 from pathlib import Path

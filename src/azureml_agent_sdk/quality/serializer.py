@@ -1,4 +1,5 @@
 """Write QualityReports to JSON, Markdown, and Azure Blob Storage (P3-08)."""
+
 from __future__ import annotations
 
 from pathlib import Path

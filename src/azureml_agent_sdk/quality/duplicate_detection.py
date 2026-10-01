@@ -1,4 +1,5 @@
 """DuplicateDetectionAgent: exact (SHA-256) and fuzzy duplicate rows (P3-05)."""
+
 from __future__ import annotations
 
 import hashlib
@@ -70,8 +71,10 @@ class DuplicateDetectionAgent(DataQualityAgent):
                 if not texts[i]:
                     continue
                 for j in range(i + 1, len(rows)):
-                    if find(i) != find(j) and texts[j] and (
-                        token_set_ratio(texts[i], texts[j]) >= self.threshold
+                    if (
+                        find(i) != find(j)
+                        and texts[j]
+                        and (token_set_ratio(texts[i], texts[j]) >= self.threshold)
                     ):
                         union(i, j)
 

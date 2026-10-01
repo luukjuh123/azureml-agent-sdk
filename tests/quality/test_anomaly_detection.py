@@ -1,4 +1,5 @@
 """AnomalyDetectionAgent tests (P3-04)."""
+
 from __future__ import annotations
 
 import json
@@ -26,9 +27,15 @@ def test_aoai_response_used():
 
 
 def test_aoai_fenced_json_and_bad_indices_ignored():
-    payload = {"anomalies": [{"row_index": 99, "column": "v", "reason": "x"},
-                             {"row_index": 3, "column": "v", "reason": "y"}]}
-    report = AnomalyDetectionAgent(agent=_aoai("```json\n" + json.dumps(payload) + "\n```")).check(ROWS)
+    payload = {
+        "anomalies": [
+            {"row_index": 99, "column": "v", "reason": "x"},
+            {"row_index": 3, "column": "v", "reason": "y"},
+        ]
+    }
+    report = AnomalyDetectionAgent(agent=_aoai("```json\n" + json.dumps(payload) + "\n```")).check(
+        ROWS
+    )
     assert [f.row_index for f in report.findings] == [3]
 
 

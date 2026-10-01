@@ -13,10 +13,14 @@ AUTH = {"Authorization": f"Bearer {TOKEN}"}
 
 
 def _result():
-    report = QualityReport.build("j", "null", 2, [Finding(severity="WARN", message="x", row_index=0)])
+    report = QualityReport.build(
+        "j", "null", 2, [Finding(severity="WARN", message="x", row_index=0)]
+    )
     return SimpleNamespace(
         job=SimpleNamespace(job_name="job-1", status="Completed"),
-        rows=[{}, {}], agent_runs=[], quality_reports=[report],
+        rows=[{}, {}],
+        agent_runs=[],
+        quality_reports=[report],
     )
 
 
@@ -62,7 +66,9 @@ def test_failed_run_records_error(make):
         raise RuntimeError("kaput")
 
     c = make(boom)
-    run_id = c.post("/pipelines/run", json={"pipeline_file": "p.yaml"}, headers=AUTH).json()["run_id"]
+    run_id = c.post("/pipelines/run", json={"pipeline_file": "p.yaml"}, headers=AUTH).json()[
+        "run_id"
+    ]
     body = _wait(c, run_id, {"failed"})
     assert "kaput" in body["error"]
     assert c.get(f"/pipelines/{run_id}/report", headers=AUTH).status_code == 409
@@ -85,7 +91,9 @@ def test_path_traversal_rejected(make):
 def test_auth_required(make):
     c = make()
     assert c.get("/pipelines/x/status").status_code == 401
-    assert c.get("/pipelines/x/status", headers={"Authorization": "Bearer wrong"}).status_code == 401
+    assert (
+        c.get("/pipelines/x/status", headers={"Authorization": "Bearer wrong"}).status_code == 401
+    )
     assert c.post("/pipelines/run", json={"pipeline_file": "p.yaml"}).status_code == 401
 
 
@@ -96,10 +104,15 @@ def test_fail_closed_without_token(make):
 
 def test_token_from_env(monkeypatch, tmp_path):
     monkeypatch.setenv("AZUREML_AGENT_API_TOKEN", "envtok")
-    app = create_app(store=SqliteRunStore(tmp_path / "r.db"), pipeline_runner=lambda p: _result(),
-                     pipelines_dir=tmp_path)
+    app = create_app(
+        store=SqliteRunStore(tmp_path / "r.db"),
+        pipeline_runner=lambda p: _result(),
+        pipelines_dir=tmp_path,
+    )
     c = TestClient(app)
-    assert c.get("/pipelines/x/status", headers={"Authorization": "Bearer envtok"}).status_code == 404
+    assert (
+        c.get("/pipelines/x/status", headers={"Authorization": "Bearer envtok"}).status_code == 404
+    )
 
 
 def test_openapi_docs_have_examples(make):

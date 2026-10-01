@@ -4,6 +4,7 @@ Never logs secret values. ``CredentialManager`` accepts an injectable
 ``credential_factory`` so tests never need to construct a real
 ``DefaultAzureCredential`` or touch the network.
 """
+
 from __future__ import annotations
 
 import os

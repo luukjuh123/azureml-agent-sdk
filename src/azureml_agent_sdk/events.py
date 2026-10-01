@@ -8,6 +8,7 @@ in registration order. ``emit_sync`` lets synchronous callers (like
 ``AgentPipeline.run``) fire an event without managing an event loop
 themselves.
 """
+
 from __future__ import annotations
 
 import asyncio

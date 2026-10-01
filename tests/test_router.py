@@ -1,6 +1,7 @@
 """Tests for AgentRouter (P2-02): route batch output rows to different agents
 based on a rule/classifier -- row field value, regex match, or arbitrary
 callable -- with first-match-wins ordering and an optional fallback agent."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass

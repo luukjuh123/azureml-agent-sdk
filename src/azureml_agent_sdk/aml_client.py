@@ -4,6 +4,7 @@ The underlying ``MLClient`` is constructed lazily via ``DefaultAzureCredential``
 can be swapped out entirely with ``ml_client_factory`` for tests, so no real Azure
 credentials or network access are ever required to exercise this class.
 """
+
 from __future__ import annotations
 
 from collections.abc import Callable, Iterable

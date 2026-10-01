@@ -1,6 +1,7 @@
 """Tests for PipelineEvents (P2-05): on_batch_start, on_batch_complete,
 on_agent_start, on_agent_complete, and on_error hooks, with both sync and
 async hook support."""
+
 from __future__ import annotations
 
 import pytest

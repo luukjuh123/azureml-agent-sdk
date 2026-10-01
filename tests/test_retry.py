@@ -2,6 +2,7 @@
 rate-limit (429) and transient errors, with configurable max retries, base
 delay, and max delay. Uses real ``openai`` exception types with a mocked
 httpx response so no live AOAI credentials or network calls are required."""
+
 from __future__ import annotations
 
 import httpx

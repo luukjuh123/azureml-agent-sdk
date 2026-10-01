@@ -5,6 +5,7 @@ managed online endpoint (via a custom ``endpoint``). ``client_factory`` can be
 injected to swap in a fake client for tests, so no real AOAI credentials or
 network calls are ever required.
 """
+
 from __future__ import annotations
 
 from collections.abc import Callable
@@ -56,7 +57,9 @@ class AzureOpenAIAgent:
         api_key = CredentialManager.get_env("AZURE_OPENAI_API_KEY")
         if api_key:
             return AzureOpenAI(
-                azure_endpoint=endpoint, api_key=api_key, api_version=self.config.api_version
+                azure_endpoint=endpoint,  # type: ignore[arg-type]
+                api_key=api_key,
+                api_version=self.config.api_version,
             )
 
         from azure.identity import get_bearer_token_provider
@@ -66,7 +69,7 @@ class AzureOpenAIAgent:
             "https://cognitiveservices.azure.com/.default",
         )
         return AzureOpenAI(
-            azure_endpoint=endpoint,
+            azure_endpoint=endpoint,  # type: ignore[arg-type]
             azure_ad_token_provider=token_provider,
             api_version=self.config.api_version,
         )

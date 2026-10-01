@@ -1,4 +1,5 @@
 """AnomalyDetectionAgent: flag numeric outliers via AOAI, z-score fallback (P3-04)."""
+
 from __future__ import annotations
 
 import json
@@ -36,9 +37,7 @@ class AnomalyDetectionAgent(DataQualityAgent):
     """Uses an ``AzureOpenAIAgent`` (if given) to flag outliers; on any failure or
     unparsable reply, falls back to a z-score test (``|z| > z_threshold``)."""
 
-    def __init__(
-        self, agent: Any | None = None, z_threshold: float = 3.0, **kwargs: Any
-    ) -> None:
+    def __init__(self, agent: Any | None = None, z_threshold: float = 3.0, **kwargs: Any) -> None:
         super().__init__(**kwargs)
         self.agent = agent
         self.z_threshold = z_threshold
@@ -55,6 +54,8 @@ class AnomalyDetectionAgent(DataQualityAgent):
 
     def _check_with_aoai(self, rows: list[dict[str, Any]]) -> list[Finding] | None:
         prompt = json.dumps({"rows": dict(enumerate(rows))}, default=str)
+        if self.agent is None:
+            return None
         try:
             anomalies = _parse_reply(self.agent.run(prompt).content)
             findings = []

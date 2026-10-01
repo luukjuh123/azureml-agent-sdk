@@ -6,6 +6,7 @@ completion context window fills up over a long-running pipeline. The most
 recently added message is always kept, even if it alone exceeds the budget,
 so a single call never silently loses its own input.
 """
+
 from __future__ import annotations
 
 from collections.abc import Callable

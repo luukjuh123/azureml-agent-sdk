@@ -7,6 +7,7 @@ together with ``asyncio.gather``. A ``max_concurrency`` semaphore caps how
 many of those calls are in flight at once, which matters for AOAI rate
 limits.
 """
+
 from __future__ import annotations
 
 import asyncio
@@ -18,7 +19,9 @@ from azureml_agent_sdk.agent import AgentResponse
 class _Agent(Protocol):
     config: Any
 
-    def run(self, user_message: str, history: list[dict[str, str]] | None = None) -> AgentResponse: ...
+    def run(
+        self, user_message: str, history: list[dict[str, str]] | None = None
+    ) -> AgentResponse: ...
 
 
 class ParallelAgentGroup:

@@ -1,4 +1,5 @@
 """Tests for AgentPipeline: BatchEndpointTrigger -> AzureOpenAIAgent(s) (P1-05)."""
+
 from __future__ import annotations
 
 import pytest

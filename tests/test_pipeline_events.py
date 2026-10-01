@@ -2,6 +2,7 @@
 lifecycle points (P2-05): batch_start -> batch_complete -> (agent_start ->
 agent_complete) per agent, and error whenever the trigger or an agent
 raises."""
+
 from __future__ import annotations
 
 import pytest

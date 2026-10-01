@@ -1,4 +1,5 @@
 """Tests for the AzureML client wrapper (P1-02)."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass

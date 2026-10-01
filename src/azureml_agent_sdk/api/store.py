@@ -1,11 +1,12 @@
 """Run store for pipeline run state: SQLite (dev) or Azure Table Storage (prod) (P4-03)."""
+
 from __future__ import annotations
 
 import json
 import sqlite3
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
-from typing import Any, Literal, Optional, Protocol
+from typing import Any, Literal, Protocol
 
 from pydantic import BaseModel, Field
 
@@ -14,7 +15,7 @@ _FIELDS = {"status", "error", "summary", "reports"}
 
 
 def _now() -> datetime:
-    return datetime.now(timezone.utc)
+    return datetime.now(UTC)
 
 
 class RunRecord(BaseModel):
@@ -23,9 +24,9 @@ class RunRecord(BaseModel):
     pipeline_file: str
     created_at: datetime = Field(default_factory=_now)
     updated_at: datetime = Field(default_factory=_now)
-    error: Optional[str] = None
-    summary: Optional[dict[str, Any]] = None
-    reports: Optional[list[dict[str, Any]]] = None
+    error: str | None = None
+    summary: dict[str, Any] | None = None
+    reports: list[dict[str, Any]] | None = None
 
 
 class RunStore(Protocol):
@@ -75,7 +76,9 @@ class SqliteRunStore:
             record = RunRecord.model_validate_json(row[0]).model_copy(
                 update={**changes, "updated_at": _now()}
             )
-            c.execute("UPDATE runs SET data = ? WHERE run_id = ?", (record.model_dump_json(), run_id))
+            c.execute(
+                "UPDATE runs SET data = ? WHERE run_id = ?", (record.model_dump_json(), run_id)
+            )
 
 
 class AzureTableRunStore:

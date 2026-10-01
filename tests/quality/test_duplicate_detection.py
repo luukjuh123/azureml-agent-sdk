@@ -1,4 +1,5 @@
 """DuplicateDetectionAgent tests (P3-05)."""
+
 from __future__ import annotations
 
 import pytest

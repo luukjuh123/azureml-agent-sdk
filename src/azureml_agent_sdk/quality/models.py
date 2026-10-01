@@ -1,8 +1,9 @@
 """Structured quality report models (P3-07)."""
+
 from __future__ import annotations
 
-from datetime import datetime, timezone
-from typing import Literal, Optional
+from datetime import UTC, datetime
+from typing import Literal
 
 from pydantic import BaseModel, Field
 
@@ -12,8 +13,8 @@ Severity = Literal["INFO", "WARN", "ERROR"]
 class Finding(BaseModel):
     """A single quality finding, optionally tied to a row and/or column."""
 
-    row_index: Optional[int] = None
-    column: Optional[str] = None
+    row_index: int | None = None
+    column: str | None = None
     severity: Severity
     message: str
 
@@ -35,12 +36,12 @@ class QualityReport(BaseModel):
     total_rows: int
     findings: list[Finding] = Field(default_factory=list)
     aggregate: AggregateStats = Field(default_factory=AggregateStats)
-    generated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    generated_at: datetime = Field(default_factory=lambda: datetime.now(UTC))
 
     @classmethod
     def build(
         cls, run_id: str, agent_name: str, total_rows: int, findings: list[Finding]
-    ) -> "QualityReport":
+    ) -> QualityReport:
         """Create a report, computing aggregate stats from ``findings``.
 
         ``pass_rate`` is the fraction of rows without a row-level WARN/ERROR

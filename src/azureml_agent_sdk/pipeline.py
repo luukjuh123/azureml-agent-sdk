@@ -3,8 +3,10 @@
 Batch output rows are parsed and fed into each agent's context window in turn
 (P1-06), with structured JSON logging emitted at each step (P1-08).
 """
+
 from __future__ import annotations
 
+from collections.abc import Sequence
 from dataclasses import dataclass, field
 from typing import Any, Protocol
 
@@ -18,13 +20,17 @@ from azureml_agent_sdk.results import parse_batch_output, rows_to_messages
 
 
 class _Trigger(Protocol):
+    config: Any
+
     def run(self) -> BatchJobResult: ...
 
 
 class _Agent(Protocol):
     config: Any
 
-    def run(self, user_message: str, history: list[dict[str, str]] | None = None) -> AgentResponse: ...
+    def run(
+        self, user_message: str, history: list[dict[str, str]] | None = None
+    ) -> AgentResponse: ...
 
 
 @dataclass
@@ -53,7 +59,7 @@ class AgentPipeline:
         self,
         name: str,
         trigger: _Trigger,
-        agents: list[_Agent],
+        agents: Sequence[_Agent | DataQualityAgent],
         output_parser: Any = parse_batch_output,
         events: PipelineEvents | None = None,
     ) -> None:

@@ -1,7 +1,8 @@
 """Tests for AzureOpenAIAgent (P1-04)."""
+
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Any
 
 from azureml_agent_sdk.agent import AgentResponse, AzureOpenAIAgent

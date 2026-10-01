@@ -1,5 +1,6 @@
 """Tests for ParallelAgentGroup (P2-01): run N agents concurrently on the same
 batch output via asyncio.gather, with a configurable concurrency limit."""
+
 from __future__ import annotations
 
 import threading
@@ -22,7 +23,7 @@ class _SleepingAgent:
     synchronous AOAI call would. Tracks concurrent-call high-water-mark via a
     shared counter so tests can assert on real overlap, not just wall time."""
 
-    def __init__(self, name: str, delay: float, tracker: "_ConcurrencyTracker") -> None:
+    def __init__(self, name: str, delay: float, tracker: _ConcurrencyTracker) -> None:
         self.config = _FakeConfig(name=name)
         self._delay = delay
         self._tracker = tracker

@@ -34,11 +34,11 @@
 - [x] [P4-05] OpenAPI docs at /docs with example payloads
 - [x] [P4-06] Docker: Dockerfile + docker-compose for local dev (no AML credentials needed in compose)
 - [x] [P4-07] Tests for REST API (httpx test client, mock pipeline runner)
-- [ ] [P5-01] Example: fraud-check pipeline — AML batch scores transactions, AOAI agent reviews flagged rows
-- [ ] [P5-02] Example: content-moderation pipeline — AML batch classifies text, AOAI agent drafts moderation decisions
-- [ ] [P5-03] Example: data-drift pipeline — AML batch computes drift metrics, AOAI agent writes drift report
-- [ ] [P5-04] Docs: Getting Started guide (README.md) with install, config, and first pipeline
-- [ ] [P5-05] Docs: Architecture diagram (Mermaid in docs/architecture.md)
-- [ ] [P5-06] Docs: API reference (auto-generated from docstrings via pdoc)
-- [ ] [P5-07] Docs: Contributing guide and development setup
-- [ ] [P5-08] PyPI packaging: pyproject.toml, versioning, build/publish workflow docs
+- [x] [P5-01] Example: fraud-check pipeline — AML batch scores transactions, AOAI agent reviews flagged rows
+- [x] [P5-02] Example: content-moderation pipeline — AML batch classifies text, AOAI agent drafts moderation decisions
+- [x] [P5-03] Example: data-drift pipeline — AML batch computes drift metrics, AOAI agent writes drift report
+- [x] [P5-04] Docs: Getting Started guide (README.md) with install, config, and first pipeline
+- [x] [P5-05] Docs: Architecture diagram (Mermaid in docs/architecture.md)
+- [x] [P5-06] Docs: API reference (auto-generated from docstrings via pdoc)
+- [x] [P5-07] Docs: Contributing guide and development setup
+- [x] [P5-08] PyPI packaging: pyproject.toml, versioning, build/publish workflow docs

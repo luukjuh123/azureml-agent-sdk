@@ -1,4 +1,5 @@
 """SummaryAgent: AOAI-written natural-language summary of a batch run (P3-06)."""
+
 from __future__ import annotations
 
 import json

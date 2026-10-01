@@ -1,10 +1,11 @@
 """NullCheckAgent: flag columns/rows with null or missing values (P3-02)."""
+
 from __future__ import annotations
 
 from typing import Any
 
 from azureml_agent_sdk.quality.base import DataQualityAgent
-from azureml_agent_sdk.quality.models import Finding, QualityReport
+from azureml_agent_sdk.quality.models import Finding, QualityReport, Severity
 
 ERROR_RATE = 0.5
 
@@ -30,7 +31,7 @@ class NullCheckAgent(DataQualityAgent):
             rate = len(null_rows) / len(rows)
             if rate <= self.threshold or not null_rows:
                 continue
-            severity = "ERROR" if rate > ERROR_RATE else "WARN"
+            severity: Severity = "ERROR" if rate > ERROR_RATE else "WARN"
             findings.append(
                 Finding(
                     column=column,

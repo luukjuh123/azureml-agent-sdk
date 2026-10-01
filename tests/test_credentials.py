@@ -1,4 +1,5 @@
 """Tests for the unified credential manager (P1-07)."""
+
 from __future__ import annotations
 
 import pytest
@@ -39,8 +40,7 @@ class TestGetEnv:
     def test_returns_value_when_set(self, monkeypatch):
         monkeypatch.setenv("AZURE_OPENAI_ENDPOINT", "https://example.openai.azure.com")
         assert (
-            CredentialManager.get_env("AZURE_OPENAI_ENDPOINT")
-            == "https://example.openai.azure.com"
+            CredentialManager.get_env("AZURE_OPENAI_ENDPOINT") == "https://example.openai.azure.com"
         )
 
     def test_returns_default_when_unset(self, monkeypatch):

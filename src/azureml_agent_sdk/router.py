@@ -6,6 +6,7 @@ dict and returning a bool -- field-equality and regex matchers are provided
 as convenience builders, but arbitrary classifier callables work too. An
 optional ``default_agent`` is used when no rule matches.
 """
+
 from __future__ import annotations
 
 import re
@@ -21,7 +22,9 @@ RowMatcher = Callable[[dict[str, Any]], bool]
 class _Agent(Protocol):
     config: Any
 
-    def run(self, user_message: str, history: list[dict[str, str]] | None = None) -> AgentResponse: ...
+    def run(
+        self, user_message: str, history: list[dict[str, str]] | None = None
+    ) -> AgentResponse: ...
 
 
 class NoMatchingAgentError(Exception):

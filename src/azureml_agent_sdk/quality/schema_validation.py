@@ -1,4 +1,5 @@
 """SchemaValidationAgent: validate rows against a Pydantic v2 model (P3-03)."""
+
 from __future__ import annotations
 
 from typing import Any

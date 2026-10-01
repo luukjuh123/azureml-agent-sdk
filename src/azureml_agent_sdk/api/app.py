@@ -1,4 +1,5 @@
 """FastAPI app: trigger and monitor pipelines over HTTP (P4-01, P4-05)."""
+
 from __future__ import annotations
 
 import os
@@ -76,8 +77,12 @@ def create_app(
         background.add_task(execute_run, store, runner, run_id, path)
         return RunAccepted(run_id=run_id, status="pending")
 
-    @app.get("/pipelines/{run_id}/status", response_model=RunRecord,
-             response_model_exclude={"reports"}, dependencies=[auth])
+    @app.get(
+        "/pipelines/{run_id}/status",
+        response_model=RunRecord,
+        response_model_exclude={"reports"},
+        dependencies=[auth],
+    )
     def run_status(run_id: str) -> RunRecord:
         return _get(run_id)
 

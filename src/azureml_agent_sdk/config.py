@@ -1,4 +1,5 @@
 """Pydantic v2 configuration models for azureml-agent-sdk (P1-09)."""
+
 from __future__ import annotations
 
 from pydantic import BaseModel, Field, field_validator

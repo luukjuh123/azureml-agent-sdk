@@ -1,4 +1,5 @@
 """Tests for batch output parsing & result-to-message injection (P1-06)."""
+
 from __future__ import annotations
 
 import json

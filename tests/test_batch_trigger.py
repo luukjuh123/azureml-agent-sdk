@@ -1,4 +1,5 @@
 """Tests for BatchEndpointTrigger: submit, poll, resolve output path (P1-03)."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field
@@ -56,7 +57,12 @@ class _FakeJobsOperations:
 
 
 class _FakeMLClient:
-    def __init__(self, status_sequence, job_name="job-123", output_path="azureml://jobs/job-123/outputs/score"):
+    def __init__(
+        self,
+        status_sequence,
+        job_name="job-123",
+        output_path="azureml://jobs/job-123/outputs/score",
+    ):
         self.batch_endpoints = _FakeBatchEndpointsOperations(job_name=job_name)
         self.jobs = _FakeJobsOperations(status_sequence, output_path=output_path)
 

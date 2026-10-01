@@ -4,6 +4,7 @@ output blob path (P1-03).
 Polling is driven through injectable ``sleep``/``clock`` callables so tests run
 instantly and deterministically, with no real waiting and no real Azure calls.
 """
+
 from __future__ import annotations
 
 import time

@@ -1,8 +1,10 @@
 """Background task runner: executes a pipeline and records its state (P4-02)."""
+
 from __future__ import annotations
 
+from collections.abc import Callable
 from pathlib import Path
-from typing import Any, Callable
+from typing import Any
 
 from azureml_agent_sdk.api.store import RunStore
 

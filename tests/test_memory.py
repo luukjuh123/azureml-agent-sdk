@@ -1,5 +1,6 @@
 """Tests for AgentMemory (P2-03): per-agent conversation history with a
 configurable max-token window that truncates the oldest messages first."""
+
 from __future__ import annotations
 
 from azureml_agent_sdk.memory import AgentMemory

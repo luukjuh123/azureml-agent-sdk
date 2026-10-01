@@ -1,4 +1,5 @@
 """ReportSerializer tests (P3-08)."""
+
 from __future__ import annotations
 
 import json
@@ -8,9 +9,13 @@ from azureml_agent_sdk.quality.models import Finding, QualityReport
 from azureml_agent_sdk.quality.serializer import ReportSerializer
 
 REPORT = QualityReport.build(
-    "r1", "null_check", 4,
-    [Finding(row_index=0, column="a", severity="ERROR", message="a | null"),
-     Finding(severity="INFO", message="ok")],
+    "r1",
+    "null_check",
+    4,
+    [
+        Finding(row_index=0, column="a", severity="ERROR", message="a | null"),
+        Finding(severity="INFO", message="ok"),
+    ],
 )
 
 

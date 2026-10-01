@@ -5,6 +5,7 @@ optional Azure Monitor sink can be attached with ``attach_azure_monitor_sink``;
 it degrades gracefully (returns ``False``) when no connection string is
 configured or the sink cannot be set up, rather than raising.
 """
+
 from __future__ import annotations
 
 import json
@@ -16,9 +17,7 @@ _REDACT_KEYS = {"api_key", "azure_openai_api_key", "key", "secret", "token", "pa
 
 
 def _redact(data: dict[str, Any]) -> dict[str, Any]:
-    return {
-        key: ("***" if key.lower() in _REDACT_KEYS else value) for key, value in data.items()
-    }
+    return {key: ("***" if key.lower() in _REDACT_KEYS else value) for key, value in data.items()}
 
 
 class JsonFormatter(logging.Formatter):
@@ -73,7 +72,7 @@ def attach_azure_monitor_sink(
         except ImportError:
             return False
     try:
-        configure_fn(connection_string=connection_string)
+        configure_fn(connection_string=connection_string)  # type: ignore[misc]
     except ImportError:
         return False
     return True

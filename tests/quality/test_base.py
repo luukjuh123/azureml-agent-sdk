@@ -1,4 +1,5 @@
 """Tests for DataQualityAgent base + AgentPipeline integration (P3-01)."""
+
 from __future__ import annotations
 
 import pytest
@@ -11,9 +12,7 @@ from azureml_agent_sdk.quality.models import Finding, QualityReport
 
 class _CountAgent(DataQualityAgent):
     def check(self, rows):
-        return self.make_report(
-            len(rows), [Finding(severity="INFO", message=f"{len(rows)} rows")]
-        )
+        return self.make_report(len(rows), [Finding(severity="INFO", message=f"{len(rows)} rows")])
 
 
 def test_base_is_abstract():
@@ -46,9 +45,7 @@ class _Trigger:
 
 def test_pipeline_runs_quality_agent_as_step():
     agent = _CountAgent()
-    pipe = AgentPipeline(
-        "p", _Trigger(), [agent], output_parser=lambda path: [{"a": 1}, {"a": 2}]
-    )
+    pipe = AgentPipeline("p", _Trigger(), [agent], output_parser=lambda path: [{"a": 1}, {"a": 2}])
     result = pipe.run()
     assert len(result.quality_reports) == 1
     report = result.quality_reports[0]

@@ -1,6 +1,7 @@
 """Tests for the YAML pipeline loader (P2-06): load a full AgentPipeline from
 a YAML file, validating its schema via Pydantic -- valid config, missing
 required fields, and an invalid agent type."""
+
 from __future__ import annotations
 
 from pathlib import Path

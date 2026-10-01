@@ -1,4 +1,5 @@
 """SummaryAgent tests (P3-06)."""
+
 from __future__ import annotations
 
 from unittest.mock import MagicMock
@@ -8,9 +9,13 @@ from azureml_agent_sdk.quality.models import Finding, QualityReport
 from azureml_agent_sdk.quality.summary import SummaryAgent
 
 REPORT = QualityReport.build(
-    "r1", "null_check", 10,
-    [Finding(row_index=1, column="a", severity="ERROR", message="a is null"),
-     Finding(row_index=2, column="a", severity="WARN", message="a is null")],
+    "r1",
+    "null_check",
+    10,
+    [
+        Finding(row_index=1, column="a", severity="ERROR", message="a is null"),
+        Finding(row_index=2, column="a", severity="WARN", message="a is null"),
+    ],
 )
 
 
@@ -44,7 +49,9 @@ def test_check_without_reports_still_works():
 
 
 def test_top_issues_limited():
-    findings = [Finding(row_index=i, column=f"c{i}", severity="WARN", message=f"m{i}") for i in range(30)]
+    findings = [
+        Finding(row_index=i, column=f"c{i}", severity="WARN", message=f"m{i}") for i in range(30)
+    ]
     big = QualityReport.build("r", "x", 30, findings)
     aoai = _aoai()
     SummaryAgent(aoai, max_issues=5).summarize(big)

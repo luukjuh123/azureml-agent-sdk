@@ -1,4 +1,5 @@
 """Tests for structured JSON logging & telemetry (P1-08)."""
+
 from __future__ import annotations
 
 import json

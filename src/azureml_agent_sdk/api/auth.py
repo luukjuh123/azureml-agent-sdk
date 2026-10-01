@@ -1,4 +1,5 @@
 """Bearer token auth (P4-04). The secret comes from ``AZUREML_AGENT_API_TOKEN``."""
+
 from __future__ import annotations
 
 import hmac
